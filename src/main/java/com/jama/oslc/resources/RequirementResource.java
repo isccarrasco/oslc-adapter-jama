@@ -65,13 +65,17 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
+import static javax.ws.rs.core.HttpHeaders.ACCEPT;
+import static javax.ws.rs.core.MediaType.TEXT_HTML;
+import static javax.ws.rs.core.MediaType.WILDCARD;
+
 @Path("{projectName}/requirement")
 @OslcService("http://jamacloud.com/#requirementSpec")
 public class RequirementResource {
 
 	@GET
 	@Produces(value = { MediaType.TEXT_HTML })
-	public void getHtmlRequirements(@Context ServletContext context, @PathParam("projectName") final String projectName,
+	public Response getHtmlRequirements(@Context ServletContext context, @PathParam("projectName") final String projectName,
 			@QueryParam("oslc.where") String where, @QueryParam("oslc.select") String select) {
 		HttpServletRequest request = ResteasyProviderFactory.getContextData(HttpServletRequest.class);
 		HttpServletResponse response = ResteasyProviderFactory.getContextData(HttpServletResponse.class);
@@ -87,9 +91,19 @@ public class RequirementResource {
 			}
 			Collection<Requirement> results = filterResources(requirementsOfProject, where);
 
-			request.setAttribute("elements", results);
-			request.setAttribute("modelName", projectName);
-			request.getRequestDispatcher("/jama/requirements_html.jsp").forward(request, response);
+			if (request.getHeader(ACCEPT).equalsIgnoreCase(WILDCARD)) {
+				ResponseInfoCollection<Requirement> response1;
+				Map<String, Object> properties = filterProperties(select);
+				response1 = getResponseInfo(results, properties, results.size());
+				return Response.ok().type("application/rdf+xml").entity(getGenericEntity(response1)).build();
+			} else {
+				request.setAttribute("elements", results);
+				request.setAttribute("modelName", projectName);
+				request.getRequestDispatcher("/jama/requirements_html.jsp").forward(request, response);
+				return Response.ok().build();
+			}
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WebApplicationException(e);

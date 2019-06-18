@@ -75,7 +75,7 @@ public class RootServicesService {
       builder.append("    <jfs:oauthUserAuthorizationUrl rdf:resource=\"" + jamaServiceBase + "oauth/authorize\"/>\n");
       builder.append("    <jfs:oauthAccessTokenUrl rdf:resource=\"" + jamaServiceBase + "oauth/accessToken\"/>\n");
       builder.append("    <jfs:oauthRealmName>Jama</jfs:oauthRealmName>\n");
-      builder.append("    <jfs:oauthDomain>" + jamaServiceBase + "/</jfs:oauthDomain>\n");
+      builder.append("    <jfs:oauthDomain>" + jamaServiceBase + "</jfs:oauthDomain>\n");
 
       builder.append("    <jfs:oauthRequestConsumerKeyUrl rdf:resource=\"" + jamaServiceBase + "oauth/requestKey\"/>\n");
       builder.append("    <jfs:oauthApprovalModuleUrl rdf:resource=\"" + jamaServiceBase + "oauth/approveKey\"/>\n");

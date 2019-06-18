@@ -11,9 +11,18 @@
  * 
  * */
 @OslcSchema ({
-        @OslcNamespaceDefinition(prefix = "item", namespaceURI = Requirement.NAMESPACE),       
-        @OslcNamespaceDefinition(prefix = "jama", namespaceURI = Namespace.VOCABULARY),
-        @OslcNamespaceDefinition(prefix = "oslc_rm", namespaceURI = "http://open-services.net/ns/rm#")            
+        //@OslcNamespaceDefinition(prefix = "item", namespaceURI = Requirement.NAMESPACE),
+        //@OslcNamespaceDefinition(prefix = "jama", namespaceURI = Namespace.VOCABULARY),
+        //@OslcNamespaceDefinition(prefix = "oslc_rm", namespaceURI = "http://open-services.net/ns/rm#"),
+        @OslcNamespaceDefinition(prefix = "rmWorkflow", namespaceURI = "http://www.ibm.com/xmlns/rdm/workflow/"),
+        @OslcNamespaceDefinition(prefix = "dcterms", namespaceURI = "http://purl.org/dc/terms/"),
+        @OslcNamespaceDefinition(prefix = "dc", namespaceURI = "http://purl.org/dc/elements/1.1/"),
+        @OslcNamespaceDefinition(prefix = "jfs", namespaceURI = "http://jazz.net/xmlns/foundation/1.0/"),
+        @OslcNamespaceDefinition(prefix = "h", namespaceURI = "http://www.w3.org/TR/REC-html40"),
+        @OslcNamespaceDefinition(prefix = "xs", namespaceURI = "http://schema.w3.org/xs/"),
+        @OslcNamespaceDefinition(prefix = "rm", namespaceURI = "http://www.ibm.com/xmlns/rdm/rdf/"),
+        @OslcNamespaceDefinition(prefix = "jp", namespaceURI = "http://jazz.net/xmlns/prod/jazz/process/1.0/"),
+        @OslcNamespaceDefinition(prefix = "rmTypes", namespaceURI = "http://www.ibm.com/xmlns/rdm/types/"),
 })
 package com.jama.oslc.model;
 
